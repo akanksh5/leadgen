@@ -1,7 +1,7 @@
 # 📇 FastAPI Lead Management System
 
 A lightweight and secure lead management backend built with **FastAPI** and **SQLite**. This application allows for public lead submission with resume upload and automated email notifications, alongside an authenticated admin interface to view and update lead statuses.
-
+The design document can be found on the repository.
 ---
 
 ## ✨ Features
@@ -20,6 +20,7 @@ A lightweight and secure lead management backend built with **FastAPI** and **SQ
 ### Prerequisites
 
 - Python 3.9+
+- Python3 Virtual Environment
 - Gmail account for email notifications (or configure your SMTP)
 
 ### Installation
@@ -52,13 +53,15 @@ python3 dbinit.py
 ### Running the Servers
 - We have 2 servers in place. One that can be publicly accessed by the customers and the other
 that will be internally hosted on the company's private servers to avoid external access.
+- The reason why we have 2 serves instead of one is because the customer facing server can have all the public endpoints. The internal APIs can be hosted on the company's private network with Basic auth enabled.
+- We don't really have to involve complex authentication methodologies like OAuth and anything that involves making changes to data should be completely inaccessible to the public.
 - Start the customer facing server with the command below.
 ```bash
 uvicorn customer:app --reload              
 ```
 -Start the management hosted server with the command below.
 ```bash
-uvicorn management:app --reload              
+uvicorn management:app --reload  --port 8080            
 ```
 
 ## 🔧 API Endpoints
@@ -149,3 +152,12 @@ Authorization: Basic YWRtaW46c2VjdXJlcGFzcw==
 }
 ```
 
+
+## Email Integration
+
+### 📬 Email Integration
+- This app uses Gmail SMTP over SSL (port 465) to send emails.
+
+- ✅ A confirmation email to the user upon successful lead submission.
+
+- 🚨 A notification email to the admin about the new lead.
