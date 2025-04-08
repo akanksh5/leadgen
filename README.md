@@ -152,10 +152,7 @@ Authorization: Basic YWRtaW46c2VjdXJlcGFzcw==
 }
 ```
 
-
-## Email Integration
-
-### 📬 Email Integration
+## 📬 Email Integration
 - This app uses Gmail SMTP over SSL (port 465) to send emails.
 
 - ✅ A confirmation email to the user upon successful lead submission.
