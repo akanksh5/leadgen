@@ -27,4 +27,94 @@ A lightweight and secure lead management backend built with **FastAPI** and **SQ
 ```bash
 git clone https://github.com/yourusername/fastapi-leads.git
 cd fastapi-leads
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+```
+
+### Configuration
+
+- Make sure these values are set in a .env file which will later be sourced in the config.py
+```bash
+GMAIL_USER=example@example.com
+GMAIL_APP_PASSWORD=your-password-here
+ADMIN_EMAIL=example@example.com
+UPLOAD_DIR=uploads
+DB_FILE =leads.db
+AUTH_USERNAME = admin
+AUTH_PASSWORD = password
+```
+
+### Database Setup
+- Since we're using SQLite for this assignment, run the dbinit script to create a file based database.
+```bash
+python3 dbinit.py
+```
+
+### Running the Servers
+- We have 2 servers in place. One that can be publicly accessed by the customers and the other
+that will be internally hosted on the company's private servers to avoid external access.
+- Start the customer facing server with the command below.
+```bash
+uvicorn customer:app --reload              
+```
+-Start the management hosted server with the command below.
+```bash
+uvicorn management:app --reload              
+```
+
+## 🔧 API Endpoints
+
+### 📥 Public Submission
+
+#### `POST /submit`
+
+Submit a new lead with resume.
+
+**Form Data:**
+
+- `first_name`: string (required)  
+- `last_name`: string (required)  
+- `email`: email string (required)  
+- `resume`: file (required)
+
+**Response:**
+
+```json
+{
+  "message": "Lead submitted successfully"
+}
+
+
+### 🔐 Admin Endpoints (Basic Auth Protected)
+
+All admin endpoints require **HTTP Basic Authentication** using the credentials defined in `config.py`.
+
+---
+
+#### `GET /leads`
+
+Returns a list of all submitted leads.
+
+**Headers:**
+Authorization: Basic base64(username:password)
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john@example.com",
+    "resume_path": "uploads/john_resume.pdf",
+    "state": "PENDING"
+  },
+  {
+    "id": 2,
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jane@example.com",
+    "resume_path": "uploads/jane_resume.pdf",
+    "state": "REACHED_OUT"
+  }
+]
