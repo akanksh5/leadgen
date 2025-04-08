@@ -82,6 +82,7 @@ Submit a new lead with resume.
 {
   "message": "Lead submitted successfully"
 }
+```
 
 
 ### 🔐 Admin Endpoints (Basic Auth Protected)
