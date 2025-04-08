@@ -119,3 +119,33 @@ Authorization: Basic base64(username:password)
     "state": "REACHED_OUT"
   }
 ]
+```
+#### `POST /leads/{lead_id}/reach_out`
+
+Marks a lead as **REACHED_OUT** to indicate the admin has contacted them.
+
+**Path Parameters:**
+
+- `lead_id`: `integer` — ID of the lead to update (required)
+
+**Headers:**
+Authorization: Basic base64(username:password)
+**Request Example:**
+
+```http
+POST /leads/3/reach_out
+Authorization: Basic YWRtaW46c2VjdXJlcGFzcw==
+```
+**Successful Response**
+```json
+{
+  "message": "Lead marked as reached out"
+}
+```
+**Error Response**
+```json
+{
+  "detail": "Lead not found"
+}
+```
+
