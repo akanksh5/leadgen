@@ -158,3 +158,19 @@ Authorization: Basic YWRtaW46c2VjdXJlcGFzcw==
 - ✅ A confirmation email to the user upon successful lead submission.
 
 - 🚨 A notification email to the admin about the new lead.
+Here's the official link to set up a Gmail App Password:
+
+- 👉 https://myaccount.google.com/apppasswords
+
+### 🔐 How to Set Up a Gmail App Password
+- Go to your Google Account Security settings.
+
+- Make sure 2-Step Verification is enabled.
+
+- Once enabled, scroll down to the "App passwords" section.
+
+- Select Mail as the app and Other (Custom name) if you want to label it (e.g., "FastAPI App").
+
+- Click Generate.
+
+- Google will give you a 16-character password. Use this in your config.py or .env file under **GMAIL_APP_PASSWORD** and use your email in **GMAIL_USER**.
